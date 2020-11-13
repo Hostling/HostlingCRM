@@ -150,8 +150,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Collective\Html\HtmlServiceProvider::class,
-        Telegram\Bot\Laravel\TelegramServiceProvider::class,
         /*
          * Application Service Providers...
          */

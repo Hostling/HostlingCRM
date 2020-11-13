@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HostingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,13 +14,17 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function() {
+    Route::get('check', [AuthController::class, 'check']);
+    Route::get('getTable', [HostingController::class, 'getTable']);
+    Route::post('editTable', [HostingController::class, 'editTable']);
+    Route::delete('delete/{id}', [HostingController::class, 'delete']);
+    Route::post('addDomen', [HostingController::class, 'addDomen']);
 });
-Route::post('botwh', 'TelegramController@botwh');
 
-//Route::post('botwh', function(){ return 1; });
+Route::post('botwh', 'TelegramController@botwh');
 
 
 
