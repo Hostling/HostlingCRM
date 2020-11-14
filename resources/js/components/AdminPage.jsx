@@ -54,6 +54,18 @@ const AdminPage = () => {
             .then(() => getInfo());
     }
 
+
+    const isOutdated = (date) => {
+        const now = new Date();
+        const domen = new Date(date);
+        let result = 'none';
+        now.setMonth(now.getMonth() + 2);
+        if(domen < now) result = 'yellow';
+        now.setMonth(now.getMonth() - 2);
+        if(domen < now) result = 'red';
+        return result;
+    }
+
     return (
         <div>
             <Edit show={showEdit} domen={editProps} close={closeEdit} />
@@ -76,8 +88,8 @@ const AdminPage = () => {
                 {table.map(item => (
                     <tr key={item.id}>
                         <td>{item.name}</td>
-                        <td>{item.domenDate}</td>
-                        <td>{item.hostDate}</td>
+                        <td style={{backgroundColor: isOutdated(item.domenDate)}}>{item.domenDate}</td>
+                        <td style={{backgroundColor: isOutdated(item.hostDate)}}>{item.hostDate}</td>
                         <td>{item.comment}</td>
                         <td>{item.domenPrice}</td>
                         <td>{item.hostPrice}</td>
